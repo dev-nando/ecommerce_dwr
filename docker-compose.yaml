@@ -1,0 +1,25 @@
+version: "3.2"
+services:
+  backend:
+    build: C:/Users/f_cec/Desenvolvimento/Estudos/Cursos_Udemy/ecommerce_dwr/backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - C:/Users/f_cec/Desenvolvimento/Estudos/Cursos_Udemy/ecommerce_dwr/backend:/var/backend
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    networks:
+      - db-net
+  frontend:
+    build: C:/Users/f_cec/Desenvolvimento/Estudos/Cursos_Udemy/ecommerce_dwr/frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - C:/Users/f_cec/Desenvolvimento/Estudos/Cursos_Udemy/ecommerce_dwr/frontend:/var/frontend
+    command: bash -c "npm start"
+    depends_on:
+      - "backend"
+    networks:
+      - db-net
+networks:
+  db-net:
+    driver: bridge

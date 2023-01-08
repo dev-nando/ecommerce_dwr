@@ -6,3 +6,7 @@ secrets.json
 *.pyc
 __pycache__/
 db.sqlite3
+commands_docker_frontend
+commands-docker_backend
+comandos
+backend/static/*

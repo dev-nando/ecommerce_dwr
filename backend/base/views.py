@@ -37,5 +37,5 @@ def getProducts(request):
 @api_view(['Get'])
 def getProduct(request, pk):
     product = Product.objects.get(_id=pk)
-    serializer = ProductSerializer(products, many=False)
-    return Response(product)
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
