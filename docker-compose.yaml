@@ -15,11 +15,14 @@ services:
       - "3000:3000"
     volumes:
       - C:/Users/f_cec/Desenvolvimento/Estudos/Cursos_Udemy/ecommerce_dwr/frontend:/var/frontend
+      - nodemodules:/var/frontend/node_modules
     command: bash -c "npm start"
     depends_on:
       - "backend"
     networks:
       - db-net
+volumes:
+  nodemodules: {}
 networks:
   db-net:
     driver: bridge
