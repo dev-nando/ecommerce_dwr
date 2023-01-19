@@ -9,7 +9,7 @@ import { listProductDetails } from '../actions/productActions'
 
 function ProductScreen() {
 
-  const [ qty, setQty ] = useState()
+  const [ qty, setQty ] = useState(1)
   
   const navigate = useNavigate()
   const match = useParams()
