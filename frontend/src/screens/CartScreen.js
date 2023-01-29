@@ -7,7 +7,7 @@ import { addToCart, removeFromCart } from '../actions/cartActions'
 
 
 function CartScreen() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const match = useParams();
   const location = useLocation();
   
@@ -30,7 +30,7 @@ function CartScreen() {
   }
 
   const checkoutHandler = () => {
-    history.push('/login?redirect=shipping')
+    navigate('/login?redirect=shipping')
   }
 
   return (
