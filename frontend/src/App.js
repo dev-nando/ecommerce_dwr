@@ -11,6 +11,7 @@ import RegisterScreen from './screens/RegisterScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
+import PlaceOrderScreen from './screens/PlaceOrderScreen'
 
 /**
  * Explanation on why the structure of this file is diferrent from the one on the video:
@@ -33,6 +34,7 @@ function App() {
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
             <Route path='/shipping' element={<ShippingScreen />} />
+            <Route path='/placeorder' element={<PlaceOrderScreen />} />
             <Route path='/payment' element={<PaymentScreen />} />
             <Route path='/product/:id' element={<ProductScreen />}/>
             <Route path='/cart/:id?' element={<CartScreen />}/>
