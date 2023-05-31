@@ -2,6 +2,8 @@ version: "3.2"
 services:
   backend:
     build: C:/Users/f_cec/Desenvolvimento/Estudos/Cursos_Udemy/ecommerce_dwr/backend
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
     ports:
       - "8000:8000"
     volumes:
@@ -11,18 +13,24 @@ services:
       - db-net
   frontend:
     build: C:/Users/f_cec/Desenvolvimento/Estudos/Cursos_Udemy/ecommerce_dwr/frontend
+    restart: unless-stopped
+    # environment:
+    #   - WDS_SOCKET_HOST=127.0.0.1 
+    #   - CHOKIDAR_USEPOLLING=true
+    #   - WATCHPACK_POLLING=true 
     ports:
       - "3000:3000"
     volumes:
       - C:/Users/f_cec/Desenvolvimento/Estudos/Cursos_Udemy/ecommerce_dwr/frontend:/var/frontend
-      - nodemodules:/var/frontend/node_modules
+      - /var/frontend/node_modules
+      # - nodemodules:/var/frontend/node_modules
     command: bash -c "npm start"
     depends_on:
       - "backend"
     networks:
       - db-net
-volumes:
-  nodemodules: {}
+# volumes:
+#   nodemodules: {}
 networks:
   db-net:
     driver: bridge

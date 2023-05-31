@@ -26,7 +26,7 @@ function ProductScreen() {
   },[dispatch, match])
   
   const addToCartHandler = () =>{
-    navigate(`/cart/${match.id}?qty=${qty}`)
+    navigate(`/cart/${match.id}`, {state: qty} )
   }
   return (
     <div>
