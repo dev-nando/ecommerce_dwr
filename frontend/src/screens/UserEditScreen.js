@@ -8,7 +8,7 @@ import FormContainer from '../components/FormContainer'
 import { getUserDetails, updateUser } from '../actions/userActions'
 import { USER_UPDATE_RESET } from '../constants/userConstants'
 
-function EditUserScreen() {
+function UserEditScreen() {
 
     const navigate = useNavigate();
 
@@ -107,4 +107,4 @@ function EditUserScreen() {
     )
 }
 
-export default EditUserScreen
+export default UserEditScreen
