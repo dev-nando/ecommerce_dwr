@@ -17,6 +17,7 @@ import UserListScreen from './screens/UserListScreen'
 import UserEditScreen from './screens/UserEditScreen'
 import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
+import OrderListScreen from './screens/OrderListScreen'
 
 /**
  * Explanation on why the structure of this file is diferrent from the one on the video:
@@ -50,6 +51,8 @@ function App() {
             
             <Route path='/admin/product/:id/edit' element={<ProductEditScreen />}/>
             <Route path='/admin/productlist' element={<ProductListScreen />}/>
+
+            <Route path='/admin/orderlist' element={<OrderListScreen />}/>
           </Routes>
         </Container>
       </main>
