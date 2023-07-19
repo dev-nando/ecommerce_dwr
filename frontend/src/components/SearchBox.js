@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Form } from 'react-bootstrap'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useSearchParams, useNavigate, useLocation } from 'react-router-dom'
+
+const useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+}
 
 function SearchBox() {
     const [keyword, setKeyword] = useState('')
@@ -8,10 +12,17 @@ function SearchBox() {
     let navigate = useNavigate()
     let location = useLocation()
 
+    let q = useQuery().get("keyword")
+    q = q ? q : ''
+
+    useEffect(() => {
+        setKeyword(q)
+    }, [q])
+
     const submitHandler = (e) => {
         e.preventDefault()
         if (keyword) {
-            navigate(`/?keyword=${keyword}`)
+            navigate(`/?keyword=${keyword}&page=1`)
         } else {
             navigate(navigate(location.pathname))
         }
