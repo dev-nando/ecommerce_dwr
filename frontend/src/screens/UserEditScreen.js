@@ -90,7 +90,7 @@ function UserEditScreen() {
                                 type='checkbox'
                                 label='Is Admin'
                                 checked={isAdmin}
-                                onChange={(e) => setIsAdmin(e.target.check)}
+                                onChange={(e) => setIsAdmin(e.target.checked)}
                             >
                             </Form.Check>
                         </Form.Group>

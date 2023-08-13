@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,9 +14,6 @@ function ProductListScreen() {
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const match = useParams();
-
-    let keyword = useLocation().search
 
     const productList = useSelector(state => state.productList)
     const { loading, error, products, page, pages } = productList
