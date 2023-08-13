@@ -25,11 +25,11 @@ import OrderListScreen from './screens/OrderListScreen'
  * 
  * Documentation: https://reactrouter.com/docs/en/v6/getting-started/overview
  */
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Header />
       <main className="py-3">
         <Container>
@@ -57,7 +57,7 @@ function App() {
         </Container>
       </main>
       <Footer />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
