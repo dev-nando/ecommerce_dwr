@@ -1,36 +1,58 @@
 version: "3.2"
 services:
+  db:
+    image: postgres
+    volumes:
+      - "${PERSISTING_DB_FOLDER}:/var/lib/postgres/data"
+    environment:
+      - "POSTGRES_DB=${POSTGRES_DB}"
+      - "POSTGRES_USER=${POSTGRES_USER}"
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}"
+    networks:
+      - db-net
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4
+    restart: always
+    volumes:
+      - "${PERSISTING_PG_ADMIN_FOLDER}:/var/lib/pgadmin"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
+      PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD}"
+    ports:
+      - "5050:80"
   backend:
-    build: C:/Users/f_cec/Desenvolvimento/Estudos/Cursos_Udemy/ecommerce_dwr/backend
+    build: "${BACK_END_PROJECT_FOLDER}"
     environment:
       CHOKIDAR_USEPOLLING: "true"
     ports:
       - "8000:8000"
     volumes:
-      - C:/Users/f_cec/Desenvolvimento/Estudos/Cursos_Udemy/ecommerce_dwr/backend:/var/backend
-    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+      - "${BACK_END_PROJECT_FOLDER}:/var/backend"
+    command: bash -c "python manage.py migrate && 
+      \ python manage.py createsuperuser --noinput --username $DJANGO_SUPERUSER_USERNAME --email $DJANGO_SUPERUSER_EMAIL && 
+      \ python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - "db"
     networks:
       - db-net
   frontend:
-    build: C:/Users/f_cec/Desenvolvimento/Estudos/Cursos_Udemy/ecommerce_dwr/frontend
+    build: "${FRONT_END_PROJECT_FOLDER}"
     restart: unless-stopped
-    # environment:
-    #   - WDS_SOCKET_HOST=127.0.0.1 
-    #   - CHOKIDAR_USEPOLLING=true
-    #   - WATCHPACK_POLLING=true 
     ports:
       - "3000:3000"
     volumes:
-      - C:/Users/f_cec/Desenvolvimento/Estudos/Cursos_Udemy/ecommerce_dwr/frontend:/var/frontend
+      - "${FRONT_END_PROJECT_FOLDER}:/var/frontend"
       - /var/frontend/node_modules
-      # - nodemodules:/var/frontend/node_modules
     command: bash -c "npm start"
     depends_on:
       - "backend"
     networks:
       - db-net
-# volumes:
-#   nodemodules: {}
+
 networks:
   db-net:
     driver: bridge

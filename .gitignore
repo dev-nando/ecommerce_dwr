@@ -10,3 +10,5 @@ commands_docker_frontend
 commands-docker_backend
 comandos
 backend/static/*
+.env
+data
